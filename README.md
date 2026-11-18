@@ -1,102 +1,55 @@
-# Simple Home
+# 知简 Web 工具集 · zhijian-web-tools
 
-基于 `Vue 3 + TypeScript + Vite` 的单页浏览器导航页。
+集中管理三个日常 Web 工具，每个应用保留自己的技术栈、依赖、锁文件、配置和部署入口。
 
-## 环境变量
+| 应用 | 目录 | 技术栈 | 已登记的线上地址 |
+| --- | --- | --- | --- |
+| Simple Home · 导航与书签 | [apps/home](apps/home/README.md) | Vue 3 + TypeScript + Vite | [home.yuwb.dev](https://home.yuwb.dev) |
+| Sticky Note · 便签画板 | [apps/sticky-note](apps/sticky-note/README.md) | React + TypeScript + Vite + PWA | [sticky.yuwb.dev](https://sticky.yuwb.dev) |
+| Resource Hub · 图片资源管理 | [apps/resource-hub](apps/resource-hub/README.md) | Nuxt 3 + GitHub API | 未登记 |
 
-复制 `.env.example` 为 `.env`，按实际环境填写：
+线上地址沿用原项目记录，不代表部署平台的仓库关联已完成迁移。详细配置见[部署说明](docs/DEPLOYMENT.md)。
 
-```bash
-VITE_API_BASE_URL=http://127.0.0.1:3001/api
+## 开始
+
+建议使用 Node.js 22.12 或更高的受支持版本。克隆后按需安装对应应用；不使用 npm workspaces，也不在根目录集中安装应用依赖。
+
+```sh
+git clone https://github.com/zhijian521/zhijian-web-tools.git
+cd zhijian-web-tools
+
+npm run setup:home
+npm run dev:home
 ```
 
-## 目录结构
+| 应用 | 安装 | 启动 | 默认开发地址 | 构建 |
+| --- | --- | --- | --- | --- |
+| 导航 | `npm run setup:home` | `npm run dev:home` | `http://localhost:5173` | `npm run build:home` |
+| 便签 | `npm run setup:sticky-note` | `npm run dev:sticky-note` | `http://localhost:3000` | `npm run build:sticky-note` |
+| 资源管理 | `npm run setup:resource-hub` | `npm run dev:resource-hub` | `http://localhost:3001` | `npm run build:resource-hub` |
+
+根命令委托给各应用的 npm 脚本。资源管理的根启动命令指定 3001 端口，便于与便签同时运行；直接在资源管理目录运行时仍沿用 Nuxt 的默认端口。应用可独立 `cd apps/<应用>` 后运行 `npm ci`、`npm run dev`。
+
+导航和资源管理的 `.env.example` 保存在各自应用目录；将副本 `.env` 放在同一目录。资源管理的 GitHub 存储仓库由 `NUXT_GITHUB_REPO` 决定，与本代码仓库名称无关。
+
+## 目录
 
 ```text
-src/
-  config/
-    api.ts                       # API 地址配置
-    seo.ts                       # 站点 SEO 配置与生成逻辑
-  modules/
-    composables/
-      useHomeState.ts            # 页面状态与行为入口
-    components/
-      layout/                    # 三个主区域组件
-      resource/                  # 书签与笔记列表
-      content/                   # 首页内容与笔记详情
-      icons/                     # SVG 图标组件
-    model/
-      data.ts                    # 初始书签/笔记数据
-      types.ts                   # 基础类型
-  views/
-    HomeView.vue                 # 页面结构
-    home.css                     # 页面样式
-  main.ts                        # 应用入口
+zhijian-web-tools/
+├─ apps/
+│  ├─ home/               导航应用、独立 package.json 和锁文件
+│  ├─ sticky-note/        便签应用、独立 package.json 和锁文件
+│  └─ resource-hub/       资源管理、独立 package.json 和锁文件
+├─ docs/
+│  └─ DEPLOYMENT.md       三个应用的独立部署与旧项目迁移说明
+├─ package.json           启动和构建入口，无共享应用依赖
+└─ README.md
 ```
 
-## 开发约定
+## 维护与历史
 
-- 页面状态统一维护在 `src/modules/composables/useHomeState.ts`，避免多层 composable 跳转。
-- `views` 只负责页面结构，样式单独放在 `src/views/home.css`。
-- 公共资源放 `public/`，网站图标使用 `public/logo.png`。
-- 站点 SEO 统一维护在 `src/config/seo.ts`，后续改标题、描述、域名、站点地图只改这一处。
+业务代码和样式在应用内部维护。各应用的 lint、测试与类型检查仍由各自脚本提供；根命令不会连带检查其他应用。便签不再在依赖安装时初始化仓库级 Git hooks。
 
-## SEO 配置
+本仓库由 `simple-home` 更名，合并 `sticky-note` 与 `simple-repository`。三个项目的原提交均作为 `master` 的祖先保留，原提交 SHA、作者和时间未重写。`archive/home-v6.0.6` 保存导航原有的历史分支，原 `v2.0.5` 至 `v6.0.6` 标签均属于导航项目。
 
-当前线上域名已固定为：
-
-```text
-https://home.yuwb.dev
-```
-
-SEO 现在由 `src/config/seo.ts` 统一管理，包含：
-
-- 首页 `title`、`description`、`keywords`
-- `canonical`、Open Graph、Twitter Card
-- `robots.txt`
-- `sitemap.xml`
-- `WebSite` 结构化数据
-
-执行构建后，Vite 会基于这份配置自动生成最终产物，无需再单独手改 `index.html` 或 `public/` 里的 SEO 文件。
-
-## Vercel 部署
-
-这个项目可以直接接 GitHub 自动部署到 Vercel。
-
-### 1. 推送仓库
-
-先把 `SimpleHome` 推送到 GitHub 仓库。
-
-### 2. 导入到 Vercel
-
-在 Vercel 后台选择：
-
-```text
-Add New Project -> Import Git Repository
-```
-
-选择当前 GitHub 仓库后，Vercel 会自动识别为 `Vite` 项目。
-
-### 3. 配置构建信息
-
-通常保持默认即可：
-
-```text
-Framework Preset: Vite
-Build Command: vite build
-Output Directory: dist
-```
-
-### 4. 配置环境变量
-
-在 Vercel 项目设置中添加：
-
-```bash
-VITE_API_BASE_URL=https://your-api-domain/api
-```
-
-注意：
-
-- 本地开发可以继续使用 `http://127.0.0.1:3001/api`
-- 线上部署不能再指向本地地址
-- 如果前端需要调用 `simple-api`，必须先把 `simple-api` 部署到公网
+各应用保留自己的许可与声明；便签的 MIT 许可证位于 [apps/sticky-note/LICENSE](apps/sticky-note/LICENSE)。本次合并不新增跨应用的统一授权。

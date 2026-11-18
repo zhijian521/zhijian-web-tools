@@ -57,7 +57,7 @@ const emit = defineEmits<{
       </button>
       <a
         class="tool-btn tool-bottom-link"
-        href="https://github.com/zhijian521/simple-home"
+        href="https://github.com/zhijian521/zhijian-web-tools/tree/master/apps/home"
         target="_blank"
         rel="noreferrer"
         aria-label="GitHub"
