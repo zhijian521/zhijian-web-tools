@@ -1,6 +1,6 @@
 # Simple Home
 
-> 本应用已迁入 [zhijian-web-tools](https://github.com/zhijian521/zhijian-web-tools)，路径为 `apps/home/`。以下命令均在本应用目录执行；集合仓库的启动入口见[根 README](../../README.md)，部署配置见[部署说明](../../docs/DEPLOYMENT.md)。
+> 本应用已迁入 [zhijian-web-tools](https://github.com/zhijian521/zhijian-web-tools)，路径为 `apps/home/`。以下命令均在本应用目录执行；集合仓库的启动入口见[根 README](../../README.md)。
 
 基于 `Vue 3 + TypeScript + Vite` 的单页浏览器导航页。
 
@@ -60,46 +60,3 @@ SEO 现在由 `src/config/seo.ts` 统一管理，包含：
 - `WebSite` 结构化数据
 
 执行构建后，Vite 会基于这份配置自动生成最终产物，无需再单独手改 `index.html` 或 `public/` 里的 SEO 文件。
-
-## Vercel 部署
-
-这个项目可以直接接 GitHub 自动部署到 Vercel。
-
-### 1. 推送仓库
-
-使用 `zhijian521/zhijian-web-tools` 仓库，Root Directory 设为 `apps/home`。
-
-### 2. 导入到 Vercel
-
-在 Vercel 后台选择：
-
-```text
-Add New Project -> Import Git Repository
-```
-
-选择当前 GitHub 仓库后，Vercel 会自动识别为 `Vite` 项目。
-
-### 3. 配置构建信息
-
-通常保持默认即可：
-
-```text
-Framework Preset: Vite
-Root Directory: apps/home
-Build Command: npm run build
-Output Directory: dist
-```
-
-### 4. 配置环境变量
-
-在 Vercel 项目设置中添加：
-
-```bash
-VITE_API_BASE_URL=https://your-api-domain/api
-```
-
-注意：
-
-- 本地开发可以继续使用 `http://127.0.0.1:3001/api`
-- 线上部署不能再指向本地地址
-- 如果前端需要调用 `simple-api`，必须先把 `simple-api` 部署到公网

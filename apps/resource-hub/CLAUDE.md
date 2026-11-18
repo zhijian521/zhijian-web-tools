@@ -49,13 +49,13 @@ server/
 
 ### 环境变量
 
-需要在 `.env`（或 Vercel 环境变量）中配置：
-- `GITHUB_TOKEN` - GitHub 个人访问令牌（需要 `repo` 权限）
-- `GITHUB_OWNER` - 仓库所有者用户名
-- `GITHUB_REPO` - 仓库名称
-- `GITHUB_BRANCH` - 分支名称（默认：`main`）
-- `AUTH_USERNAME` / `AUTH_PASSWORD` - 登录凭据
-- `JWT_SECRET` - JWT 签名密钥
+需要在应用目录的 `.env` 中配置：
+- `NUXT_GITHUB_TOKEN` - GitHub 个人访问令牌（需要 `repo` 权限）
+- `NUXT_GITHUB_OWNER` - 仓库所有者用户名
+- `NUXT_GITHUB_REPO` - 仓库名称
+- `NUXT_GITHUB_BRANCH` - 分支名称（默认：`main`）
+- `NUXT_AUTH_USERNAME` / `NUXT_AUTH_PASSWORD` - 登录凭据
+- `NUXT_JWT_SECRET` - JWT 签名密钥
 
 ### 文件上传流程
 
@@ -149,7 +149,7 @@ server/
 git commit -m "feat: add site icon"
 git commit -m "fix: resolve auth token expiration"
 git commit -m "refactor: simplify image upload logic"
-git commit -m "docs: update deployment guide"
+git commit -m "docs: 更新开发说明"
 ```
 
 ### 提交前检查

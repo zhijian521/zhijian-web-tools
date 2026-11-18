@@ -1,10 +1,10 @@
 # 资源仓库 (Resource Hub)
 
-> 本应用已迁入 [zhijian-web-tools](https://github.com/zhijian521/zhijian-web-tools)，路径为 `apps/resource-hub/`。以下命令均在本应用目录执行；集合仓库的启动入口见[根 README](../../README.md)，部署配置见[部署说明](../../docs/DEPLOYMENT.md)。
+> 本应用已迁入 [zhijian-web-tools](https://github.com/zhijian521/zhijian-web-tools)，路径为 `apps/resource-hub/`。以下命令均在本应用目录执行；集合仓库的启动入口见[根 README](../../README.md)。
 
 资源仓库 Web 应用 - 上传文件并自动同步到 GitHub。
 
-使用 Nuxt 3 + TypeScript + Vercel Serverless Functions 构建。
+使用 Nuxt 3 + TypeScript + Nitro 服务端 API 构建。
 
 当前版本支持图片管理，后续将扩展支持更多文件类型。
 
@@ -13,7 +13,6 @@
 - **框架**: Nuxt 3
 - **语言**: TypeScript
 - **UI**: Vue 3 Composition API
-- **部署**: Vercel
 - **存储**: GitHub API
 - **认证**: JWT + HttpOnly Cookie
 
@@ -107,59 +106,9 @@ npm run build
 npm run preview
 ```
 
-## 部署到 Vercel
+## 环境变量
 
-### 方法 1: 通过 Vercel CLI
-
-```bash
-# 安装 Vercel CLI
-npm i -g vercel
-
-# 登录
-vercel login
-
-# 部署
-vercel
-
-# 生产环境部署
-vercel --prod
-```
-
-### 方法 2: 通过 GitHub 集成（推荐）
-
-1. 使用 `zhijian521/zhijian-web-tools`，将 Root Directory 设为 `apps/resource-hub`
-2. 在 Vercel 中导入项目
-3. 在 Vercel 控制台设置环境变量：
-   - `NUXT_GITHUB_TOKEN`
-   - `NUXT_GITHUB_OWNER`
-   - `NUXT_GITHUB_REPO`
-   - `NUXT_GITHUB_BRANCH`（可选）
-   - `NUXT_AUTH_USERNAME`
-   - `NUXT_AUTH_PASSWORD`
-   - `NUXT_JWT_SECRET`
-   - `NUXT_TOKEN_EXPIRY_DAYS`（可选）
-4. 自动部署
-
-### 环境变量配置
-
-在 Vercel 控制台设置环境变量：
-
-```
-Settings → Environment Variables → Add New
-```
-
-添加以下变量（与 `nuxt.config.ts` 的 runtimeConfig 对应，使用 `NUXT_` 前缀）：
-
-```
-NUXT_GITHUB_TOKEN=your_github_token
-NUXT_GITHUB_OWNER=your_username
-NUXT_GITHUB_REPO=your_repo
-NUXT_GITHUB_BRANCH=main
-NUXT_AUTH_USERNAME=admin
-NUXT_AUTH_PASSWORD=your_password
-NUXT_JWT_SECRET=your_jwt_secret
-NUXT_TOKEN_EXPIRY_DAYS=7
-```
+将本应用目录中的 `.env.example` 复制为 `.env`，按实际值填写。变量使用 `NUXT_` 前缀，与 `nuxt.config.ts` 的 `runtimeConfig` 对应；GitHub 存储仓库与代码仓库分别配置。
 
 ## API 端点
 

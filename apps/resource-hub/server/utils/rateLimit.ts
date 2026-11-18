@@ -2,7 +2,7 @@ import { RATE_LIMIT_CONFIG } from '~/server/config/constants'
 
 /**
  * 简单的内存速率限制器
- * 注意：在生产环境（Vercel）中，建议使用 Upstash Redis 等外部存储
+ * 限流状态仅保存在当前进程内，多实例之间不共享。
  */
 
 interface RateLimitEntry {

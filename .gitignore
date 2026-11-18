@@ -7,7 +7,6 @@ dist-ssr/
 .nitro/
 .cache/
 coverage/
-.vercel/
 
 # 各应用的本地配置与日志
 .env

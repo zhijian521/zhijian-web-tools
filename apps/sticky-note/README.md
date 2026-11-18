@@ -1,6 +1,6 @@
 # Sticky Note
 
-> 本应用已迁入 [zhijian-web-tools](https://github.com/zhijian521/zhijian-web-tools)，路径为 `apps/sticky-note/`。以下命令均在本应用目录执行；集合仓库的启动入口见[根 README](../../README.md)，部署配置见[部署说明](../../docs/DEPLOYMENT.md)。
+> 本应用已迁入 [zhijian-web-tools](https://github.com/zhijian521/zhijian-web-tools)，路径为 `apps/sticky-note/`。以下命令均在本应用目录执行；集合仓库的启动入口见[根 README](../../README.md)。
 
 迁移后安装依赖不再自动运行 Husky，避免在应用子目录查找 `.git` 或影响集合仓库的其他应用。原 `.husky/` 和 lint-staged 配置保留，检查命令仍可手动运行。开发端口以 `vite.config.ts` 为准，默认为 `3000`。
 

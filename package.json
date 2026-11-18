@@ -2,7 +2,7 @@
   "name": "zhijian-web-tools",
   "version": "1.0.0",
   "private": true,
-  "description": "知简 Web 工具集：导航、便签与资源管理，独立开发和部署。",
+  "description": "知简 Web 工具集：导航、便签与资源管理，独立开发与本地运行。",
   "scripts": {
     "setup:home": "npm --prefix apps/home ci",
     "dev:home": "npm --prefix apps/home run dev",

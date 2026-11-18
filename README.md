@@ -1,14 +1,12 @@
 # 知简 Web 工具集 · zhijian-web-tools
 
-集中管理三个日常 Web 工具，每个应用保留自己的技术栈、依赖、锁文件、配置和部署入口。
+集中管理三个日常 Web 工具，每个应用保留自己的技术栈、依赖、锁文件和本地开发配置。
 
-| 应用 | 目录 | 技术栈 | 已登记的线上地址 |
-| --- | --- | --- | --- |
-| Simple Home · 导航与书签 | [apps/home](apps/home/README.md) | Vue 3 + TypeScript + Vite | [home.yuwb.dev](https://home.yuwb.dev) |
-| Sticky Note · 便签画板 | [apps/sticky-note](apps/sticky-note/README.md) | React + TypeScript + Vite + PWA | [sticky.yuwb.dev](https://sticky.yuwb.dev) |
-| Resource Hub · 图片资源管理 | [apps/resource-hub](apps/resource-hub/README.md) | Nuxt 3 + GitHub API | 未登记 |
-
-线上地址沿用原项目记录，不代表部署平台的仓库关联已完成迁移。详细配置见[部署说明](docs/DEPLOYMENT.md)。
+| 应用 | 目录 | 技术栈 |
+| --- | --- | --- |
+| Simple Home · 导航与书签 | [apps/home](apps/home/README.md) | Vue 3 + TypeScript + Vite |
+| Sticky Note · 便签画板 | [apps/sticky-note](apps/sticky-note/README.md) | React + TypeScript + Vite + PWA |
+| Resource Hub · 图片资源管理 | [apps/resource-hub](apps/resource-hub/README.md) | Nuxt 3 + GitHub API |
 
 ## 开始
 
@@ -40,8 +38,6 @@ zhijian-web-tools/
 │  ├─ home/               导航应用、独立 package.json 和锁文件
 │  ├─ sticky-note/        便签应用、独立 package.json 和锁文件
 │  └─ resource-hub/       资源管理、独立 package.json 和锁文件
-├─ docs/
-│  └─ DEPLOYMENT.md       三个应用的独立部署与旧项目迁移说明
 ├─ package.json           启动和构建入口，无共享应用依赖
 └─ README.md
 ```
